@@ -1,3 +1,3 @@
 define({
-	resizeUrl: '//snw-server.cyb.openstart.ru/images/r/'
+	resizeUrl: '//test2.snail.ru/images/r/'
 });
