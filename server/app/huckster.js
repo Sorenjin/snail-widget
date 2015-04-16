@@ -1,316 +1,341 @@
 /**
  * Created by cyberex on 12.03.15.
  */
-require(['huckster/api', 'huckster/config', 'jquery'], function (eh, config, $)
-{
-	config.versions = config.versions || {};
-	var vConfig = {};
-
-	function setConfigVersion(ver)
+require(
+	['huckster/api', 'huckster/config', 'huckster/client-config', 'jquery'],
+	function (eh, config, clientConfig, $)
 	{
-		vConfig = $.extend({
-			templateSuffix : '',
-			cssSuffix      : '',
-			buttonStoreMode: 'storage',
-			sliderConfig   : {},
-			buttonConfig   : {
-				show: false
-			}
-		}, config.versions[ver], true);
-	}
+		config.versions = config.versions || {};
+		var vConfig = {};
 
-	var dialogOpened = false;
-	var floatingButton;
+		eh.setCompanyId(clientConfig.companyId || 0);
 
-	function showButton(showDescription)
-	{
-		showDescription = showDescription || false;
-
-		if (!vConfig.buttonConfig.show)
-			return;
-
-		require(['floating-button'], function (FB)
+		function setConfigVersion(ver)
 		{
-			var provider = eh.getProvider();
+			vConfig = $.extend({
+				templateSuffix : '',
+				cssSuffix      : '',
+				buttonStoreMode: 'storage',
+				sliderConfig   : {},
+				buttonConfig   : {
+					show: false
+				}
+			}, config.versions[ver], true);
+		}
 
-			if (floatingButton)
-				floatingButton
-					.setOptions({
-						showDescription: showDescription
-					})
-					.show();
-			else
-				floatingButton = new FB({
-					click: function ()
-					{
-						provider.send({
-							open    : true
-						})
-					},
-					text : vConfig.buttonConfig.label || 'Экономь с нами',
-					description: 'В любой момент нажмите<br>на кнопку и узнайте скидку<br>на понравившиеся вам товары',
-					showDescription: showDescription
-				});
+		var dialogOpened = false;
+		var floatingButton;
 
-			floatingButton.show();
-		});
-	}
-
-	eh
-		.on('wtype', function (e, v)
+		function showButton(showDescription)
 		{
-			if (v < 1 || v > 3)
-				v = 1;
+			showDescription = showDescription || false;
 
-			setConfigVersion('v' + v);
-		})
-		.on('offers', function (e, offers)
-		{
-			if (!offers || dialogOpened)
+			if (!vConfig.buttonConfig.show)
 				return;
 
-			dialogOpened = true;
+			require(['floating-button'], function (FB)
+			{
+				var provider = eh.getProvider();
 
-			if (floatingButton)
-				floatingButton.hide();
-
-			var p = this;
-
-			require([
-					'jquery',
-					'hbs!huckster/tpl/window' + vConfig.templateSuffix,
-					'css!huckster/tpl/window' + vConfig.cssSuffix,
-					'jquery/owl.carousel'
-				],
-				function ($, template)
-				{
-					$.each(offers, function (i, offer)
-					{
-						offer.discount = (100 - offer.sale / offer.price * 100).toFixed();
-						offer.title = decodeURIComponent(offer.title);
-						offer.active = offer.active || false;
+				if (floatingButton)
+					floatingButton
+						.setOptions({
+							showDescription: showDescription
+						})
+						.show();
+				else
+					floatingButton = new FB({
+						click          : function ()
+						{
+							provider.send({
+								open: true
+							})
+						},
+						text           : vConfig.buttonConfig.label || 'Экономь с нами',
+						description    : 'В любой момент нажмите<br>на кнопку и узнайте скидку<br>на понравившиеся вам товары',
+						showDescription: showDescription
 					});
 
-					$('body').append(template({
-						offers: offers
-					}));
+				floatingButton.show();
+			});
+		}
 
-					$('.discount-modal .owl-carousel').owlCarousel(vConfig.sliderConfig);
+		eh
+			.on('wtype', function (e, v)
+			{
+				if (v < 1 || v > 3)
+					v = 1;
 
-					p.send({
-						widget  : true
-					});
+				setConfigVersion('v' + v);
+			})
+			.on('offers', function (e, offers)
+			{
+				if (!offers || dialogOpened)
+					return;
 
-					$('.discount-modal .owl-carousel .item').removeClass('faded');
+				dialogOpened = true;
 
-					function closeDialog()
+				if (floatingButton)
+					floatingButton.hide();
+
+				var p = this;
+
+				require([
+						'jquery',
+						'hbs!huckster/tpl/window' + vConfig.templateSuffix,
+						'css!huckster/tpl/window' + vConfig.cssSuffix,
+						'jquery/owl.carousel'
+					],
+					function ($, template)
 					{
-						$('.ov, .discount-modal').remove();
-						dialogOpened = false;
-					}
-
-					$('.discount-modal .close').on('click', function ()
-					{
-						p.send({
-							canceled: true
+						$.each(offers, function (i, offer)
+						{
+							offer.discount = (100 - offer.sale / offer.price * 100).toFixed();
+							offer.title = decodeURIComponent(offer.title);
+							offer.active = offer.active || false;
 						});
 
-						switch (vConfig.buttonStoreMode)
+						$('body').append(template({
+							offers: offers
+						}));
+
+						$('.discount-modal .owl-carousel').owlCarousel(vConfig.sliderConfig);
+
+						p.send({
+							widget: true
+						});
+
+						$('.discount-modal .owl-carousel .item').removeClass('faded');
+
+						function closeDialog()
 						{
-							case 'storage':
-
-								require(['jquery', 'jquery/storage'], function ($)
-								{
-									// Устанавливаем флаг в локальном хранилище для отображения кнопки
-									var ls = $.initNamespaceStorage('huckster').localStorage;
-
-									ls.set('showButton', true);
-
-									showButton(true);
-								});
-
-								break;
-
-							case 'query':
-
-								showButton(true);
-
-								break;
+							$('.ov, .discount-modal').remove();
+							dialogOpened = false;
 						}
 
-						closeDialog();
-					});
-
-					var $discountModal = $('.discount-modal');
-
-					$discountModal
-						.on('click', '.item', function (e)
+						$('.discount-modal .close').on('click', function ()
 						{
-							e.preventDefault();
-							$(this).toggleClass('selected');
-						})
-						.on('click', '.what-is', function (e)
-						{
-							e.preventDefault();
+							p.send({
+								canceled: true
+							});
 
-							$('.discount-s').hide();
-							$('.help-s').show();
-						})
-						.on('click', '.go-back', function (e)
-						{
-							e.preventDefault();
-
-							$('.discount-s').show();
-							$('.help-s').hide();
-						});
-
-					var $hucksterPhone = $("#huckster-phone");
-					//$hucksterPhone.mask("+7(999) 999-99-99");
-
-					$discountModal
-						.find('.phone-form').on('submit', function (e)
-						{
-							e.preventDefault();
-
-							var $selected = $discountModal.find('.item.selected');
-							if ($selected.length == 0)
+							switch (vConfig.buttonStoreMode)
 							{
-								alert('Пожалуйста, выберите одно из предложений');
-								return;
+								case 'storage':
+
+									require(['jquery', 'jquery/storage'], function ($)
+									{
+										// Устанавливаем флаг в локальном хранилище для отображения кнопки
+										var ls = $.initNamespaceStorage('huckster').localStorage;
+
+										ls.set('showButton', true);
+
+										showButton(true);
+									});
+
+									break;
+
+								case 'query':
+
+									showButton(true);
+
+									break;
 							}
 
-							var phone = $hucksterPhone.val();
+							closeDialog();
+						});
+
+						var $discountModal = $('.discount-modal');
+
+						$discountModal
+							.on('click', '.item', function (e)
+							{
+								e.preventDefault();
+								$(this).toggleClass('selected');
+							})
+							.on('click', '.what-is', function (e)
+							{
+								e.preventDefault();
+
+								$('.discount-s').hide();
+								$('.help-s').show();
+							})
+							.on('click', '.go-back', function (e)
+							{
+								e.preventDefault();
+
+								$('.discount-s').show();
+								$('.help-s').hide();
+							});
+
+						var $hucksterPhone = $("#huckster-phone");
+						//$hucksterPhone.mask("+7(999) 999-99-99");
+
+						$discountModal
+							.find('.phone-form').on('submit', function (e)
+							{
+								e.preventDefault();
+
+								var $selected = $discountModal.find('.item.selected');
+								if ($selected.length == 0)
+								{
+									alert('Пожалуйста, выберите одно из предложений');
+									return;
+								}
+
+								var phone = $hucksterPhone.val();
 //						if (phone == '')
 //						{
 //							alert('Пожалуйста, укажите номер телефона');
 //							return;
 //						}
 
-							var offers = [];
-							$selected.each(function ()
-							{
-								offers.push($(this).data('item-id'))
-							});
-
-							try
-							{
-								var phoneEncoded = encodeURIComponent(phone);
-								if (phoneEncoded === undefined || phoneEncoded == '')
-									phoneEncoded = phone;
-							} catch (e)
-							{
-								phoneEncoded = phone;
-								var error = e;
-							}
-							var data = {
-								offers  : offers,
-								phone   : phoneEncoded
-							};
-
-							p.send(data);
-							if (error || false)
-								data.error = error.message || 'Unknown';
-
-							if (vConfig.buttonStoreMode == 'storage')
-								require(['jquery', 'jquery/storage'], function ($)
+								var offers = [];
+								$selected.each(function ()
 								{
-									var ls = $.initNamespaceStorage('huckster').localStorage;
-
-									ls.remove('showButton');
+									offers.push($(this).data('item-id'))
 								});
 
-							closeDialog();
-						});
-				})
-		})
-		.on('order', function (e, data)
+								try
+								{
+									var phoneEncoded = encodeURIComponent(phone);
+									if (phoneEncoded === undefined || phoneEncoded == '')
+										phoneEncoded = phone;
+								} catch (e)
+								{
+									phoneEncoded = phone;
+									var error = e;
+								}
+								var data = {
+									offers: offers,
+									phone : phoneEncoded
+								};
+
+								p.send(data);
+								if (error || false)
+									data.error = error.message || 'Unknown';
+
+								if (vConfig.buttonStoreMode == 'storage')
+									require(['jquery', 'jquery/storage'], function ($)
+									{
+										var ls = $.initNamespaceStorage('huckster').localStorage;
+
+										ls.remove('showButton');
+									});
+
+								closeDialog();
+							});
+					})
+			})
+			.on('order', function (e, data)
+			{
+				if (data === true)
+					require(['jquery'], function ($)
+					{
+						$('<div>Ваша заявка на скидку оформлена! В ближайшее время с вами свяжется оператор.</div>')
+							.dialog({
+								title: 'Спасибо за ваш выбор!',
+								modal: true,
+								close: function ()
+								{
+									$(this).remove();
+								}
+							});
+					})
+			})
+			.on('button', function (e, data)
+			{
+				if ((data.button || false) === true)
+					showButton(false);
+			});
+
+		setConfigVersion(config.defaultVersion || 'v1');
+
+		if (vConfig.buttonConfig.show)
+			switch (vConfig.buttonStoreMode)
+			{
+				case 'storage':
+
+					require(['jquery', 'jquery/storage'], function ($)
+					{
+						var ls = $.initNamespaceStorage('huckster').localStorage;
+
+						if (ls.get('showButton'))
+							showButton(false);
+					});
+
+					break;
+			}
+
+		window.aaa = function (v)
 		{
-			if (data === true)
-				require(['jquery'], function ($)
-				{
-					$('<div>Ваша заявка на скидку оформлена! В ближайшее время с вами свяжется оператор.</div>')
-						.dialog({
-							title: 'Спасибо за ваш выбор!',
-							modal: true,
-							close: function ()
-							{
-								$(this).remove();
-							}
-						});
-				})
-		})
-		.on('button', function (e, data)
-		{
-			if ((data.button || false) === true)
-				showButton(false);
-		});
+			eh.trigger('wtype', v || 1);
+			eh.trigger('offers', [
+					{
+						"offerid" : 12,
+						"title"   : "СНЕГОУБОРЩИК ЭЛЕКТРИЧЕСКИЙ PROFI P200046",
+						"image"   : "http://neva-center.ru/m/item/images/16531/img1928.jpg",
+						"price"   : 12300,
+						"sale"    : 12000,
+						"discount": 300 // <-- NOTE Это не проценты!
+					},
+					{
+						"offerid" : 13,
+						"title"   : "КАНИСТРА ТОПЛИВНАЯ 5Л. ЗЕЛЕНАЯ OREGON",
+						"image"   : "http://neva-center.ru/m/item/images/00000008673/kartinka.jpg",
+						"price"   : 15500,
+						"sale"    : 15000,
+						"discount": 500
+					},
+					{
+						"offerid" : 12,
+						"title"   : "СНЕГОУБОРЩИК ЭЛЕКТРИЧЕСКИЙ PROFI P200046",
+						"image"   : "http://neva-center.ru/m/item/images/00000009612/cache/echo5800_120_120.jpg",
+						"price"   : 12300,
+						"sale"    : 12000,
+						"discount": 300,
+						active    : true
+					},
+					{
+						"offerid" : 13,
+						"title"   : "КАНИСТРА ТОПЛИВНАЯ 5Л. ЗЕЛЕНАЯ OREGON",
+						"image"   : "http://neva-center.ru/m/item/images/00000007755/cache/echo2takta01l_120_120.jpg",
+						"price"   : 15500,
+						"sale"    : 15000,
+						"discount": 500
+					},
+					{
+						"offerid" : 12,
+						"title"   : "СНЕГОУБОРЩИК ЭЛЕКТРИЧЕСКИЙ PROFI P200046",
+						"image"   : "http://neva-center.ru/m/item/images/00000006150/cache/cj7y_120_120.jpg",
+						"price"   : 12300,
+						"sale"    : 12000,
+						"discount": 300
+					}
+				]
+			);
 
-	setConfigVersion(config.defaultVersion || 'v1');
-
-	if (vConfig.buttonConfig.show)
-		switch (vConfig.buttonStoreMode)
-		{
-			case 'storage':
-
-				require(['jquery', 'jquery/storage'], function ($)
-				{
-					var ls = $.initNamespaceStorage('huckster').localStorage;
-
-					if (ls.get('showButton'))
-						showButton(false);
-				});
-
-				break;
-		}
-
-	window.aaa = function (v)
+			return 'Opening';
+		};
+	},
+	function (err)
 	{
-		eh.trigger('wtype', v || 1);
-		eh.trigger('offers', [
-				{
-					"offerid" : 12,
-					"title"   : "СНЕГОУБОРЩИК ЭЛЕКТРИЧЕСКИЙ PROFI P200046",
-					"image"   : "http://neva-center.ru/m/item/images/16531/img1928.jpg",
-					"price"   : 12300,
-					"sale"    : 12000,
-					"discount": 300 // <-- NOTE Это не проценты!
-				},
-				{
-					"offerid" : 13,
-					"title"   : "КАНИСТРА ТОПЛИВНАЯ 5Л. ЗЕЛЕНАЯ OREGON",
-					"image"   : "http://neva-center.ru/m/item/images/00000008673/kartinka.jpg",
-					"price"   : 15500,
-					"sale"    : 15000,
-					"discount": 500
-				},
-				{
-					"offerid" : 12,
-					"title"   : "СНЕГОУБОРЩИК ЭЛЕКТРИЧЕСКИЙ PROFI P200046",
-					"image"   : "http://neva-center.ru/m/item/images/00000009612/cache/echo5800_120_120.jpg",
-					"price"   : 12300,
-					"sale"    : 12000,
-					"discount": 300,
-					active    : true
-				},
-				{
-					"offerid" : 13,
-					"title"   : "КАНИСТРА ТОПЛИВНАЯ 5Л. ЗЕЛЕНАЯ OREGON",
-					"image"   : "http://neva-center.ru/m/item/images/00000007755/cache/echo2takta01l_120_120.jpg",
-					"price"   : 15500,
-					"sale"    : 15000,
-					"discount": 500
-				},
-				{
-					"offerid" : 12,
-					"title"   : "СНЕГОУБОРЩИК ЭЛЕКТРИЧЕСКИЙ PROFI P200046",
-					"image"   : "http://neva-center.ru/m/item/images/00000006150/cache/cj7y_120_120.jpg",
-					"price"   : 12300,
-					"sale"    : 12000,
-					"discount": 300
-				}
-			]
-		);
+		var failedId = err.requireModules && err.requireModules[0];
+		if (failedId === 'huckster/client-config')
+		{
+			requirejs.undef(failedId);
 
-		return 'Opening';
-	};
-});
+			define('huckster/client-config', [], function ()
+			{
+				return {
+					companyId: 0
+				}
+			});
+
+			require(['huckster/client-config']);
+		} else
+		{
+			throw err;
+		}
+	}
+);
