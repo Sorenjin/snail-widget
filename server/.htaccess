@@ -3,3 +3,17 @@
 	Header add Access-Control-Allow-Headers "origin, x-requested-with, content-type"
 	Header add Access-Control-Allow-Methods "PUT, GET, POST, DELETE, OPTIONS"
 </IfModule>
+
+<IfModule mod_rewrite.c>
+    RewriteEngine on
+    RewriteBase /
+
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^images/r/.*\.(jpg|jpeg|gif|png|img)$ resize.php [L,QSA,NC]
+    RewriteCond %{REQUEST_FILENAME} -f
+
+    ## Cache reset
+    # RewriteCond %{HTTP:Cache-Control} ^no-cache$ [OR]
+    # RewriteCond %{HTTP:Pragma} ^no-cache$
+    # RewriteRule ^images/r/.*\.(jpg|jpeg|gif|png|img)$ img2.php [L,QSA,NC]
+</IfModule>
