@@ -104,7 +104,7 @@ define(['jquery/pgwbrowser', 'cookies', 'huckster/config'], function (undefined,
 			p.user.ip = data.ip;
 			p.user.browser = pgwBrowser.browser.name;
 			p.user.browser_version = pgwBrowser.browser.fullVersion;
-			p.user.is_mobile = (jQuery.browser || {mobile: null}).mobile;
+			p.user.viewport = pgwBrowser.viewport;
 			p.user.platform = pgwBrowser.os.name;
 			p.user.language = p.getLanguage();
 			p.user.referrer = document.referrer;
