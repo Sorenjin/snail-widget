@@ -1,0 +1,24 @@
+<div class="ov"></div>
+<div class="discount-modal">
+	<span class="close"></span>
+	<h4>Хотите скидку? Выберите интересующие Вас товары:</h4>
+
+	<div class="owl-carousel">
+		{{#offers}}
+			<div class="item{{#if active}} selected{{/if}}" data-item-id="{{offerid}}">
+	    	<span class="img-wrap">
+	    		<img class="lazyOwl" data-src="/images/r/120x120/{{image}}" src="/images/r/120x120/{{image}}" alt="">
+	    	</span> <span class="title">{{title}}</span> <span class="discount">скидка: {{discount}}%</span>
+	    	<span class="red-price">
+	    		<span class="label">Ваша цена:</span>
+				<span class="price">{{sale}} <span class="rub">руб.</span></span>
+	    	</span>
+			</div>
+		{{/offers}}
+	</div>
+	<form class="phone-form">
+		<label for="huckster-phone">Телефон:</label>
+		<input type="text" name="phone" id="huckster-phone">
+		<input type="submit" value="Хочу скидку">
+	</form>
+</div>

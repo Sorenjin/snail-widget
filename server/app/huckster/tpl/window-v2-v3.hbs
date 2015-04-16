@@ -1,0 +1,39 @@
+<div class="ov"></div>
+<div class="discount-modal">
+	<span class="close"></span>
+
+	<div class="discount-s">
+		<h4>Хотите скидку? Выберите интересующие Вас товары:</h4>
+
+		<div class="owl-carousel">
+			{{#offers}}
+				<div class="item{{#if active}} selected{{/if}}" data-item-id="{{offerid}}">
+	    	<span class="img-wrap">
+	    		<img class="lazyOwl" data-src="{{resize image '120x160'}}" src="{{resize image '120x160'}}" alt="">
+	    	</span> <span class="title">{{title}}</span> <span class="discount">скидка: {{discount}}%
+			<span class="old-price">Цена: {{formatNumber price}} р.</span></span>
+	    	<span class="red-price">
+	    		<span class="label">Ваша цена:</span>
+				<span class="price">{{formatNumber sale}} <span class="rub">р.</span></span>
+	    	</span>
+				</div>
+			{{/offers}}
+		</div>
+		<form class="phone-form">
+			<label for="huckster-phone">Телефон:</label>
+			<input type="text" name="phone" id="huckster-phone">
+			<input type="submit" value="Хочу скидку">
+		</form>
+		<p class="message">Мы свяжемся с Вами для оформления заказа <span class="what-is">Узнать что это?</span>
+		</p>
+	</div>
+	<div class="help-s" style="display:none">
+		<p>С помощью этого сервиса вы можете оформить скидку на те товары, которые вы просмотрели на сайте. Для
+		   получения скидки выберите товар в диалоговом окне и введите свой контактный номер телефона. После этого с
+		   вами свяжется оператор для оформления заказа.</p>
+
+		<div class="btn-cnt">
+			<div class="go-back">Врнуться назад</div>
+		</div>
+	</div>
+</div>

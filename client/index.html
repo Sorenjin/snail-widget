@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head lang="ru">
+	<meta charset="UTF-8">
+	<title>Проверка удалённой настройки скрипта</title>
+
+	<script src="js/require.js"></script>
+	<script>
+		(function ()
+		{
+			require.config({
+
+				baseUrl    : '//snw-server.cyb.openstart.ru/app',
+				waitSeconds: 0,
+
+				shim: {
+					'jquery/owl.carousel': {
+						deps: ['css!./owl.carousel/style']
+					},
+					'handlebars/intl'    : {
+						deps   : ['handlebars'],
+						exports: 'HandlebarsIntl'
+					},
+					'handlebars/intl/ru' : ['handlebars/intl']
+				}
+			});
+			require(['huckster']);
+		})();
+	</script>
+</head>
+<body>
+<h1>Проверка удалённой настройки скрипта</h1>
+</body>
+</html>

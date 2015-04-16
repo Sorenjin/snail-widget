@@ -1,0 +1,312 @@
+%sprite {
+	background: url(i/fb-spr.png) no-repeat;
+	display:    block;
+}
+
+%sprite-arrow {
+	@extend %sprite;
+	width:               378px;
+	height:              299px;
+	background-position: -2px -2px;
+}
+
+%sprite-cloud {
+	@extend %sprite;
+	width:               282px;
+	height:              132px;
+	background-position: -384px -2px;
+}
+
+%sprite-sale {
+	@extend %sprite;
+	width:               44px;
+	height:              44px;
+	background-position: -384px -138px;
+}
+
+.hide-text, .sale-percent {
+	font-size:   0;
+	text-align:  left;
+	text-indent: -999px;
+	overflow:    hidden;
+}
+
+.floating-box {
+	width:    64px;
+	position: fixed;
+	bottom:   70px;
+	right:    70px;
+	z-index:  994;
+}
+
+.floating-desc {
+	display:           block;
+	width:             150px;
+	height:            150px;
+	padding:           114px 10px 0 10px;
+	box-sizing:        border-box;
+	background:        #e4f2db;
+	background-image:  -webkit-linear-gradient(to top, rgba(227, 241, 219, 0.14), rgba(227, 241, 219, 0.14));
+	background-image:  linear-gradient(to top, rgba(227, 241, 219, 0.14), rgba(227, 241, 219, 0.14));
+	box-shadow:        inset 1px 1px 1px 1px rgba(255, 255, 255, 0.1), inset -1px -1px 1px 1px rgba(0, 0, 0, 0.05);
+	border-radius:     20px;
+	position:          absolute;
+	top:               -43px;
+	left:              -43px;
+	transform:         translate3D(0, 0, 0);
+	-webkit-animation: floatingDesc 7s ease infinite;
+	animation:         floatingDesc 7s ease infinite;
+}
+
+.floating-desc-text {
+	display:           block;
+	width:             130px;
+	height:            28px;
+	position:          absolute;
+	top:               71px;
+	left:              -33px;
+	overflow:          hidden;
+	color:             #3b9a00;
+	font-size:         12px;
+	line-height:       14px;
+	text-transform:    uppercase;
+	text-align:        center;
+	-webkit-animation: floatingText 7s ease infinite;
+	animation:         floatingText 7s ease infinite;
+}
+
+.floating-btn {
+	cursor:           pointer;
+	display:          block;
+	width:            64px;
+	height:           64px;
+	padding:          10px;
+	box-sizing:       border-box;
+	background:       #46a800;
+	background-image: -webkit-linear-gradient(to top, #3b9b00, #57ba00);
+	background-image: linear-gradient(to top, #3b9b00, #57ba00);
+	box-shadow:       inset 1px 1px 1px 1px rgba(255, 255, 255, 0.3), inset -1px -1px 1px 1px rgba(0, 0, 0, 0.1);
+	border-radius:    9px;
+	position:         relative;
+	transform:        translate3D(0, 0, 0);
+	opacity:          .7;
+	z-index:          1;
+}
+
+.sale-percent {
+	@extend %sprite-sale;
+	display: block;
+}
+
+.floating-btn {
+	&:hover {
+		opacity: 1;
+		> span {
+			display: block;
+		}
+	}
+	&:active {
+		background-image: -webkit-linear-gradient(to top, #57ba00, #3b9b00);
+		background-image: linear-gradient(to top, #57ba00, #3b9b00);
+	}
+	&:hover + .floating-desc {
+		transform:         translate3D(0, 0, 0);
+		opacity:           1;
+		-webkit-animation: floatingDescHover .3s ease both;
+		animation:         floatingDescHover .3s ease both;
+		+ .floating-desc-text {
+			-webkit-animation: floatingTextHover .3s ease both;
+			animation:         floatingTextHover .3s ease both;
+		}
+	}
+}
+
+.floating-desc, .floating-btn {
+	-webkit-transition: all .3s ease;
+	transition:         all .3s ease;
+}
+
+.arrow-to-button {
+	@extend %sprite-arrow;
+	width:    378px;
+	height:   298px;
+	position: fixed;
+	bottom:   160px;
+	right:    90px;
+	z-index:  995;
+}
+
+.arrow-cloud {
+	@extend %sprite-cloud;
+	display:     flex;
+	align-items: center;
+	width:       282px;
+	height:      132px;
+	padding:     0 30px 0 32px;
+	box-sizing:  border-box;
+	color:       #0c0c0c;
+	font-size:   14px;
+	font-style:  italic;
+	line-height: 17px;
+	position:    absolute;
+	top:         -92px;
+	right:       -40px;
+}
+
+.btn-back {
+	display:         inline-block;
+	padding:         15px 12px;
+	background:      #e8e8e8;
+	box-shadow:      inset 1px 1px 1px 1px rgba(255, 255, 255, 0.1), inset -1px -1px 1px 1px rgba(0, 0, 0, 0.05);
+	border-radius:   7px;
+	color:           #4b4b4b !important;
+	font-size:       16px;
+	line-height:     19px;
+	text-decoration: none !important;
+}
+
+@media (max-width: 1400px) {
+	.arrow-to-button {
+		display: none;
+	}
+}
+
+@-webkit-keyframes floatingDesc {
+	0% {
+		transform: translate3D(0, 0, 0) scale(.4, .4);
+		opacity:   0
+	}
+	20% {
+		transform: translate3D(0, 0, 0);
+		opacity:   1
+	}
+	80% {
+		transform: translate3D(0, 0, 0);
+		opacity:   1
+	}
+	83% {
+		transform: translate3D(0, 0, 0) scale(.9, .9);
+		opacity:   1
+	}
+	100% {
+		transform: translate3D(0, 0, 0) scale(1.3, 1.3);
+		opacity:   0
+	}
+}
+
+@-webkit-keyframes floatingText {
+	0% {
+		opacity: 0
+	}
+	10% {
+		opacity: 0
+	}
+	30% {
+		opacity: .6
+	}
+	40% {
+		opacity: .3
+	}
+	50% {
+		opacity: .6
+	}
+	60% {
+		opacity: .3
+	}
+	70% {
+		opacity: .6
+	}
+	100% {
+		opacity: 0
+	}
+}
+
+@-webkit-keyframes floatingDescHover {
+	0% {
+		transform: translate3D(0, 0, 0) scale(.4, .4);
+		opacity:   0
+	}
+	100% {
+		transform: translate3D(0, 0, 0);
+		opacity:   1
+	}
+}
+
+@-webkit-keyframes floatingTextHover {
+	0% {
+		opacity: 0
+	}
+	100% {
+		opacity: 1
+	}
+}
+
+@keyframes floatingDesc {
+	0% {
+		transform: translate3D(0, 0, 0) scale(.4, .4);
+		opacity:   0
+	}
+	20% {
+		transform: translate3D(0, 0, 0);
+		opacity:   1
+	}
+	80% {
+		transform: translate3D(0, 0, 0);
+		opacity:   1
+	}
+	83% {
+		transform: translate3D(0, 0, 0) scale(.9, .9);
+		opacity:   1
+	}
+	100% {
+		transform: translate3D(0, 0, 0) scale(1.3, 1.3);
+		opacity:   0
+	}
+}
+
+@keyframes floatingText {
+	0% {
+		opacity: 0
+	}
+	10% {
+		opacity: 0
+	}
+	30% {
+		opacity: .6
+	}
+	40% {
+		opacity: .3
+	}
+	50% {
+		opacity: .6
+	}
+	60% {
+		opacity: .3
+	}
+	70% {
+		opacity: .6
+	}
+	100% {
+		opacity: 0
+	}
+}
+
+@keyframes floatingDescHover {
+	0% {
+		transform: translate3D(0, 0, 0) scale(.4, .4);
+		opacity:   0
+	}
+	100% {
+		transform: translate3D(0, 0, 0);
+		opacity:   1
+	}
+}
+
+@keyframes floatingTextHover {
+	0% {
+		opacity: 0
+	}
+	100% {
+		opacity: 1
+	}
+}
