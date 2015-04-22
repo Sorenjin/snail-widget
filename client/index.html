@@ -5,39 +5,18 @@
 	<title>Проверка удалённой настройки скрипта</title>
 
 	<script src="js/require.js"></script>
+	<script src="http://test2.snail.ru/app/hs.js"></script>
 	<script>
-		(function ()
+		define('huckster/client-config', [], function ()
 		{
-			require.config({
-
-				baseUrl    : '//test2.snail.ru/app',
-				waitSeconds: 0,
-
-				shim: {
-					'jquery/owl.carousel': {
-						deps: ['css!./owl.carousel/style']
-					},
-					'handlebars/intl'    : {
-						deps   : ['handlebars'],
-						exports: 'HandlebarsIntl'
-					},
-					'handlebars/intl/ru' : ['handlebars/intl'],
-					'jquery/pgwbrowser': {
-						deps: ['jquery']
-					}
-				}
-			});
-			define('huckster/client-config', [], function()
-			{
-				return {
-					companyId: 777
-				}
-			});
-			require(['huckster']);
-		})();
+			return {
+				companyId: 777
+			}
+		});
+		require(['huckster']);
 	</script>
 </head>
 <body>
-<h1>Проверка удалённой настройки скрипта</h1>
+	<h1>Проверка удалённой настройки скрипта</h1>
 </body>
 </html>
