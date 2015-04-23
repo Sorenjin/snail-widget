@@ -1,4 +1,11 @@
 .discount-modal {
+
+	* {
+		font-family: "HelveticaNeue-Light", ​Helvetica, sans-serif;
+		font-weight: normal;
+		box-sizing:  border-box;
+	}
+
 	z-index:     999;
 	position:    fixed;
 	width:       816px;
@@ -10,6 +17,7 @@
 	box-shadow:  0 0 20px rgba(0, 0, 0, 0.2);
 	padding:     40px 46px 10px;
 	font-family: 'opensans-regular', Helvetica, sans-serif;
+
 	.owl-carousel {
 		overflow:   hidden;
 		border:     1px solid #c3c3c3;
@@ -25,6 +33,7 @@
 		text-align:    center;
 		font-size:     27px;
 		margin-bottom: 40px;
+		margin-top:    0;
 	}
 	.close {
 		cursor:     pointer;

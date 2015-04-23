@@ -1,4 +1,11 @@
 .discount-modal {
+
+	* {
+		font-family: "HelveticaNeue-Light", ​Helvetica, sans-serif;
+		font-weight: normal;
+		box-sizing:  border-box;
+	}
+
 	$borderColor: #ddd;
 	$mainPadding: 20px;
 	$sliderWidth: 910px - $mainPadding*2;
@@ -30,6 +37,7 @@
 		text-align:    center;
 		font-size:     31px;
 		margin-bottom: 40px;
+		margin-top:    0;
 	}
 
 	.close {
