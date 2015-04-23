@@ -5,7 +5,7 @@ define(
 		function log()
 		{
 			if (console && console.log)
-				console.log.apply(null, arguments);
+				console.log.apply(console, arguments);
 		}
 
 		var provider,
