@@ -20,6 +20,7 @@
 	box-shadow:  0 0 20px rgba(0, 0, 0, 0.2);
 	padding:     50px $mainPadding;
 	font-family: 'opensans-regular', Helvetica, sans-serif;
+	box-sizing:  border-box;
 
 	.owl-carousel {
 		border-radius: 20px;
@@ -35,7 +36,7 @@
 	h4 {
 		color:         #f00;
 		text-align:    center;
-		font-size:     31px;
+		font-size:     29px;
 		margin-bottom: 40px;
 		margin-top:    0;
 	}
@@ -80,9 +81,9 @@
 		margin-left: 25px;
 
 		.label {
-			color:       #000;
-			font-size:   13px;
-			padding:     0;
+			color:     #000;
+			font-size: 13px;
+			padding:   0;
 		}
 
 		.price {

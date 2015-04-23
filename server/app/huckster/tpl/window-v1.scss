@@ -17,6 +17,7 @@
 	box-shadow:  0 0 20px rgba(0, 0, 0, 0.2);
 	padding:     40px 46px 10px;
 	font-family: 'opensans-regular', Helvetica, sans-serif;
+	box-sizing:  border-box;
 
 	.owl-carousel {
 		overflow:   hidden;
@@ -31,7 +32,7 @@
 	h4 {
 		color:         #f00;
 		text-align:    center;
-		font-size:     27px;
+		font-size:     25px;
 		margin-bottom: 40px;
 		margin-top:    0;
 	}
@@ -129,17 +130,17 @@
 		text-align: center;
 
 		.label {
-			color:       #f00;
-			font-size:   16px;
-			padding:     0;
+			color:     #f00;
+			font-size: 16px;
+			padding:   0;
 		}
 
 		.price {
-			font-size:   18px;
-			color:       #000;
+			font-size: 18px;
+			color:     #000;
 		}
 		.rub {
-			color:       #000;
+			color: #000;
 		}
 	}
 	.green-price {
