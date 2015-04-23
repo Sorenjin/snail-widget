@@ -318,8 +318,11 @@ require(
 			return 'Opening';
 		};
 
-		window.huckster_echo = function (data)
+		window.huckster_echo = function (data, companyId, clientId)
 		{
+			data.companyid = companyId;
+			data.clientid = clientId;
+
 			eh.getProvider().send({
 				echo: data
 			});

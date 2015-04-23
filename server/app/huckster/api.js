@@ -63,8 +63,10 @@ define(
 		{
 			if (data.echo !== undefined)
 			{
-				data.echo.clientid = this.user.clientid;
-				data.echo.companyid = companyId;
+				if (data.echo.clientid === undefined)
+					data.echo.clientid = this.user.clientid;
+				if (data.echo.companyid === undefined)
+					data.echo.companyid = companyId;
 				data.echo = JSON.stringify(data.echo);
 			}
 			else if (typeof data == 'object')
