@@ -36,6 +36,8 @@ require(
 		{
 			showDescription = showDescription || false;
 
+			log('Config', vConfig);
+
 			if (!vConfig.buttonConfig.show)
 				return;
 
@@ -262,6 +264,8 @@ require(
 			});
 
 		setConfigVersion(config.defaultVersion || 'v1');
+
+		log('Config set', vConfig);
 
 		if (vConfig.buttonConfig.show)
 			switch (vConfig.buttonStoreMode)
