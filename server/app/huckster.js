@@ -242,17 +242,14 @@ require(
 			.on('order', function (e, data)
 			{
 				if (data === true)
-					require(['jquery'], function ($)
+					require(['hbs!huckster/tpl/thank-you', 'css!huckster/tpl/window' + vConfig.cssSuffix], function (tpl)
 					{
-						$('<div>Ваша заявка на скидку оформлена! В ближайшее время с вами свяжется оператор.</div>')
-							.dialog({
-								title: 'Спасибо за ваш выбор!',
-								modal: true,
-								close: function ()
-								{
-									$(this).remove();
-								}
-							});
+						$('body').append(tpl());
+
+						$('.discount-modal .close').click(function ()
+						{
+							$('.discount-modal').remove();
+						})
 					})
 			})
 			.on('button', function (e, data)
