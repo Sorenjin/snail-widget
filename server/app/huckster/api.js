@@ -90,7 +90,10 @@ define(
 				{
 					if (console && console.log)
 						console.log('Data parsing error: ', event.data);
+
+					response = {};
 				}
+
 				if (typeof response.clientid != "undefined" && response.clientid != 0)
 				{
 					p.userModel.set(response.clientid, p);
