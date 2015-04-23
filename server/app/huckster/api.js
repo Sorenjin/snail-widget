@@ -67,6 +67,11 @@ define(
 				data.companyid = companyId;
 			}
 
+			if (data.echo !== undefined)
+				data = {
+					echo: JSON.stringify(data)
+				};
+
 			this.socket.send(JSON.stringify(data));
 		};
 
