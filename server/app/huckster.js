@@ -259,7 +259,7 @@ require(
 			{
 				log('Showing button');
 
-				if ((data.button || false) === true)
+				if ((data || false) === true)
 					showButton(false);
 			});
 
