@@ -61,16 +61,19 @@ define(
 
 		Provider.prototype.send = function (data)
 		{
-			if (typeof data == 'object')
+			if (data.echo !== undefined)
+			{
+				data = {
+					clientid : this.user.clientid,
+					companyid: companyId,
+					echo     : JSON.stringify(data.echo)
+				}
+			}
+			else if (typeof data == 'object')
 			{
 				data.clientid = this.user.clientid;
 				data.companyid = companyId;
 			}
-
-			if (data.echo !== undefined)
-				data = {
-					echo: JSON.stringify(data)
-				};
 
 			this.socket.send(JSON.stringify(data));
 		};
