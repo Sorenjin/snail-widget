@@ -317,6 +317,13 @@ require(
 
 			return 'Opening';
 		};
+
+		window.huckster_echo = function (data)
+		{
+			eh.getProvider().send({
+				echo: data
+			});
+		};
 	},
 	function (err)
 	{
