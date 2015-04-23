@@ -2,6 +2,12 @@ define(
 	['jquery/pgwbrowser', 'cookies'],
 	function (undefined, Cookies)
 	{
+		function log()
+		{
+			if (console && console.log)
+				console.log.apply(null, arguments);
+		}
+
 		var provider,
 			events = {},
 			companyId = 0,
@@ -102,6 +108,8 @@ define(
 					response = {};
 				}
 
+				log('WS-Message: ', response);
+
 				if (typeof response.clientid != "undefined" && response.clientid != 0)
 				{
 					p.userModel.set(response.clientid, p);
@@ -110,7 +118,7 @@ define(
 					{
 						$.each(response, function (key, data)
 						{
-							if (key == 'clientid')
+							if (key == 'clientid' || key == 'companyid')
 								return;
 
 							eventsHandler.trigger(key, data);

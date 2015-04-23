@@ -5,6 +5,12 @@ require(
 	['huckster/api', 'huckster/config', 'huckster/client-config', 'jquery'],
 	function (eh, config, clientConfig, $)
 	{
+		function log()
+		{
+			if (console && console.log)
+				console.log.apply(null, arguments);
+		}
+
 		config.versions = config.versions || {};
 		var vConfig = {};
 
@@ -63,8 +69,12 @@ require(
 		eh
 			.on('wtype', function (e, v)
 			{
+				log('Setting wtype', v);
+
 				if (v < 1 || v > 3)
 					v = 1;
+
+				log('Setting actual wtype', v);
 
 				setConfigVersion('v' + v);
 			})
@@ -245,6 +255,8 @@ require(
 			})
 			.on('button', function (e, data)
 			{
+				log('Showing button');
+
 				if ((data.button || false) === true)
 					showButton(false);
 			});
