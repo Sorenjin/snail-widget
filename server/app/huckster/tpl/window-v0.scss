@@ -21,6 +21,10 @@
 		background:    #fff;
 	}
 
+	h1 {
+		margin-top: -14px;
+	}
+
 	h4 {
 		color:         #f00;
 		text-align:    center;
@@ -29,6 +33,7 @@
 	}
 
 	.close {
+		cursor:     pointer;
 		width:      22px;
 		height:     22px;
 		background: #fff url('img/close.jpg') 0 0 no-repeat;
