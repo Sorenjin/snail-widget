@@ -83,7 +83,14 @@ define(
 			var p = this;
 			this.socket.onmessage = function (event)
 			{
-				var response = JSON.parse(event.data);
+				try
+				{
+					var response = JSON.parse(event.data);
+				} catch (e)
+				{
+					if (console && console.log)
+						console.log('Data parsing error: ', event.data);
+				}
 				if (typeof response.clientid != "undefined" && response.clientid != 0)
 				{
 					p.userModel.set(response.clientid, p);
