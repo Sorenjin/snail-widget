@@ -128,20 +128,19 @@
 	.red-price {
 		display:    block;
 		text-align: center;
+
 		.label {
 			color:       #f00;
 			font-size:   16px;
 			padding:     0;
-			font-weight: bold;
 		}
+
 		.price {
 			font-size:   18px;
 			color:       #000;
-			font-weight: bold;
 		}
 		.rub {
 			color:       #000;
-			font-weight: normal;
 		}
 	}
 	.green-price {
