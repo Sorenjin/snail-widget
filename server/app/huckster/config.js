@@ -70,7 +70,7 @@ define(function ()
 
 				return {
 					show : true,
-					label: 'Получи купон<br/>на скидку'
+					label: 'Получить скидку'
 				};
 
 			case 'v3':
