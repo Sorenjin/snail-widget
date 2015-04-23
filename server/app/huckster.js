@@ -312,32 +312,23 @@ require(
 						"price"   : 15500,
 						"sale"    : 15000,
 						"discount": 500
-					}/*,
-					 {
-					 "offerid" : 12,
-					 "title"   : "СНЕГОУБОРЩИК ЭЛЕКТРИЧЕСКИЙ PROFI P200046",
-					 "image"   : "http://neva-center.ru/m/item/images/00000009612/cache/echo5800_120_120.jpg",
-					 "price"   : 12300,
-					 "sale"    : 12000,
-					 "discount": 300,
-					 active    : true
-					 },
-					 {
-					 "offerid" : 13,
-					 "title"   : "КАНИСТРА ТОПЛИВНАЯ 5Л. ЗЕЛЕНАЯ OREGON",
-					 "image"   : "http://neva-center.ru/m/item/images/00000007755/cache/echo2takta01l_120_120.jpg",
-					 "price"   : 15500,
-					 "sale"    : 15000,
-					 "discount": 500
-					 },
-					 {
-					 "offerid" : 12,
-					 "title"   : "СНЕГОУБОРЩИК ЭЛЕКТРИЧЕСКИЙ PROFI P200046",
-					 "image"   : "http://neva-center.ru/m/item/images/00000006150/cache/cj7y_120_120.jpg",
-					 "price"   : 12300,
-					 "sale"    : 12000,
-					 "discount": 300
-					 }*/
+					},
+					{
+						"offerid" : 12,
+						"title"   : "Item PROFI P200046",
+						"image"   : "http://neva-center.ru/m/item/images/16531/img1928.jpg",
+						"price"   : 12300,
+						"sale"    : 12000,
+						"discount": 300
+					},
+					{
+						"offerid" : 13,
+						"title"   : "Item OREGON",
+						"image"   : "http://neva-center.ru/m/item/images/00000008673/kartinka.jpg",
+						"price"   : 15500,
+						"sale"    : 15000,
+						"discount": 500
+					}
 				]
 			});
 		};
