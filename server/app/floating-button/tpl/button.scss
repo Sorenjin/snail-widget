@@ -73,6 +73,11 @@
 	text-align:        center;
 	-webkit-animation: floatingText 7s ease infinite;
 	animation:         floatingText 7s ease infinite;
+
+	strong {
+		font-size:   inherit;
+		color:       inherit;
+	}
 }
 
 .floating-btn {
