@@ -13,7 +13,7 @@
 			'floating-button'    : server + 'floating-button',
 			'jquery/owl.carousel': server + 'jquery/owl.carousel',
 			'jquery/pgwbrowser'  : server + 'jquery/pgwbrowser',
-			'jquery2.1.3'        : server + 'jquery'
+			'jquery2.1.3r': server + 'jquery'
 		},
 
 		shim: {
@@ -52,8 +52,8 @@
 				'jquery': server + 'jquery'
 			}
 		});
-//	define('jquery2.1.3', ['jquery'], function (jq)
-//	{
-//		return jq.noConflict(true);
-//	});
+	define('jquery2.1.3', ['jquery2.1.3r'], function (jq)
+	{
+		return jq.noConflict(true);
+	});
 })();
