@@ -1,6 +1,6 @@
 define(
-	['jquery/pgwbrowser', 'cookies'],
-	function (undefined, Cookies)
+	['jquery', 'jquery/pgwbrowser', 'cookies'],
+	function ($, undefined, Cookies)
 	{
 		function log()
 		{
