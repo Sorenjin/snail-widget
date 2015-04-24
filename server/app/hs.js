@@ -13,7 +13,7 @@
 			'floating-button'    : server + 'floating-button',
 			'jquery/owl.carousel': server + 'jquery/owl.carousel',
 			'jquery/pgwbrowser'  : server + 'jquery/pgwbrowser',
-			'jquery2.1.3r': server + 'jquery'
+			'jquery2.1.3r'       : server + 'jquery'
 		},
 
 		shim: {
@@ -28,7 +28,7 @@
 			'jquery/pgwbrowser'  : {
 				deps: ['jquery']
 			},
-			'jquery2.1.3r': {
+			'jquery2.1.3r'       : {
 				exports: 'jQuery'
 			}
 		},
