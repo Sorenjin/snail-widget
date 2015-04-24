@@ -30,7 +30,7 @@ define(['handlebars', 'handlebars/intl', 'hbs/config', 'handlebars/intl/ru'], fu
 	return {
 		load: function (name, parentRequire, onload)
 		{
-			$.get(parentRequire.toUrl(name + '.hbs'))
+			$.get(parentRequire.toUrl(name + '.hbs'), 'html')
 				.done(function (source)
 				{
 					var template = hbs.compile(source);
