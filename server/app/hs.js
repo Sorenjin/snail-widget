@@ -36,6 +36,9 @@
 			},
 			'jquery/pgwbrowser'  : {
 				'jquery': 'jquery2.1.3'
+			},
+			'huckster/api': {
+				'jquery': 'jquery2.1.3'
 			}
 		}
 	});
