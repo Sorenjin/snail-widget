@@ -39,7 +39,7 @@
 			},
 			'huckster/api'       : {
 				'jquery'           : 'jquery2.1.3',
-				'jquery/pgwbrowser': server + 'jquery/pgwbrowser'
+				'jquery/pgwbrowser': server + 'jquery/pgwbrowser.js'
 			}
 		}
 	});
