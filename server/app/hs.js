@@ -6,7 +6,6 @@
 
 		paths: {
 			'huckster'       : server + 'huckster',
-			'jquery'         : server + 'jquery',
 			'cookies'        : server + 'cookies',
 			'hbs'            : server + 'hbs',
 			'css'            : server + 'css',
@@ -28,4 +27,17 @@
 			}
 		}
 	});
+	if (jQuery !== undefined)
+	{
+		define('jquery', [], function ()
+		{
+			return jQuery;
+		});
+	}
+	else
+		require.config({
+			paths: {
+				'jquery': server + 'jquery'
+			}
+		});
 })();
