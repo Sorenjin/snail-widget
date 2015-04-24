@@ -248,7 +248,7 @@ require(
 
 						$('.discount-modal .close').click(function ()
 						{
-							$('.discount-modal').remove();
+							$('.discount-modal, .ov').remove();
 						})
 					})
 			})
