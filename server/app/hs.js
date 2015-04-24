@@ -27,7 +27,7 @@
 			}
 		}
 	});
-	if (jQuery !== undefined)
+	if (window.jQuery !== undefined)
 	{
 		define('jquery', [], function ()
 		{
