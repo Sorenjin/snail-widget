@@ -33,6 +33,9 @@
 		map: {
 			'jquery/owl.carousel': {
 				'jquery': 'jquery2.1.3'
+			},
+			'jquery/pgwbrowser'  : {
+				'jquery': 'jquery2.1.3'
 			}
 		}
 	});
