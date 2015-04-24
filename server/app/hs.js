@@ -5,12 +5,14 @@
 	require.config({
 
 		paths: {
-			'huckster'       : server + 'huckster',
-			'cookies'        : server + 'cookies',
-			'hbs'            : server + 'hbs',
-			'css'            : server + 'css',
-			'handlebars'     : server + 'handlebars',
-			'floating-button': server + 'floating-button'
+			'huckster'           : server + 'huckster',
+			'cookies'            : server + 'cookies',
+			'hbs'                : server + 'hbs',
+			'css'                : server + 'css',
+			'handlebars'         : server + 'handlebars',
+			'floating-button'    : server + 'floating-button',
+			'jquery/owl.carousel': server + 'jquery/owl.carousel',
+			'jquery/pgwbrowser'  : server + 'jquery/pgwbrowser'
 		},
 
 		shim: {
