@@ -27,6 +27,9 @@
 			'handlebars/intl/ru' : ['handlebars/intl'],
 			'jquery/pgwbrowser'  : {
 				deps: ['jquery']
+			},
+			'jquery2.1.3r': {
+				exports: 'jQuery'
 			}
 		},
 
