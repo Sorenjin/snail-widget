@@ -188,6 +188,15 @@ require(
 							{
 								e.preventDefault();
 
+								try
+								{
+									ga('send', 'event', 'huckster', 'clickbutton');
+								}
+								catch (err)
+								{
+									// Do nothing
+								}
+
 								var $selected = $discountModal.find('.item.selected');
 								if ($selected.length == 0)
 								{
