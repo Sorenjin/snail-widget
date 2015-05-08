@@ -19,13 +19,14 @@ require(
 		function setConfigVersion(ver)
 		{
 			vConfig = $.extend({
-				templateSuffix : '',
-				cssSuffix      : '',
-				buttonStoreMode: 'storage',
-				sliderConfig   : {},
-				buttonConfig   : {
+				templateSuffix        : '',
+				cssSuffix             : '',
+				buttonStoreMode       : 'storage',
+				sliderConfig          : {},
+				buttonConfig          : {
 					show: false
-				}
+				},
+				additionalOverlayClass: ''
 			}, config.versions[ver], true);
 		}
 
@@ -108,7 +109,8 @@ require(
 						});
 
 						$('body').append(template({
-							offers: offers
+							offers : offers,
+							ovClass: vConfig.additionalOverlayClass
 						}));
 
 						$('.discount-modal .owl-carousel').owlCarousel(vConfig.sliderConfig);

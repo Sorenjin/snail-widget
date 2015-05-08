@@ -5,16 +5,17 @@ define(function ()
 		defaultVersion: 'v1',
 		versions      : {
 			v1: {
-				templateSuffix : '-v1',
-				cssSuffix      : '-v1',
-				sliderConfig   : getSliderConfig('v1')
+				templateSuffix: '-v1',
+				cssSuffix     : '-v1',
+				sliderConfig  : getSliderConfig('v1')
 			},
 			v2: {
-				templateSuffix : '-v2-v3',
-				cssSuffix      : '-v1',
-				buttonStoreMode: 'query',
-				sliderConfig   : getSliderConfig('v1'),
-				buttonConfig   : getButtonConfig('v2')
+				templateSuffix        : '-v2-v3',
+				cssSuffix             : '-v1',
+				buttonStoreMode       : 'query',
+				sliderConfig          : getSliderConfig('v1'),
+				buttonConfig          : getButtonConfig('v2'),
+				additionalOverlayClass: 'w-gray-bg'
 			},
 			v3: {
 				templateSuffix : '-v2-v3',
