@@ -227,6 +227,10 @@
 			color:         #7a7878;
 			font-size:     20px;
 			text-align:    center;
+
+			&.l {
+				width: 520px;
+			}
 		}
 		&[type="submit"] {
 			padding:          0 22px;

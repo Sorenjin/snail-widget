@@ -249,6 +249,16 @@ require(
 
 								closeDialog();
 							});
+
+						$hucksterPhone.focus();
+						var domHucksterPhone = $hucksterPhone.get(0);
+						if (domHucksterPhone.setSelectionRange)
+						{
+							var len = $hucksterPhone.val().length * 2;
+							domHucksterPhone.setSelectionRange(len, len);
+						}
+						else
+							$hucksterPhone.val($hucksterPhone.val());
 					})
 			})
 			.on('order', function (e, data)
