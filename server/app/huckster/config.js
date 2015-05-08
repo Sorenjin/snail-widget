@@ -14,7 +14,7 @@ define(function ()
 				cssSuffix             : '-v1',
 				buttonStoreMode       : 'query',
 				sliderConfig          : getSliderConfig('v1'),
-				buttonConfig          : getButtonConfig('v2'),
+				buttonConfig          : getButtonConfig('v2-nb'),
 				additionalOverlayClass: 'w-gray-bg'
 			},
 			v3: {
@@ -72,6 +72,14 @@ define(function ()
 				return {
 					show : true,
 					label: '<strong>Получи купон<br/>на скидку</strong>'
+				};
+
+			case 'v2-nb':
+
+				return {
+					show     : true,
+					label    : '<strong>Получи купон<br/>на скидку</strong>',
+					hideArrow: true
 				};
 
 			case 'v3':

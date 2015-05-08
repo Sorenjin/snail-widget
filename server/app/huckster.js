@@ -24,7 +24,8 @@ require(
 				buttonStoreMode       : 'storage',
 				sliderConfig          : {},
 				buttonConfig          : {
-					show: false
+					show     : false,
+					hideArrow: false
 				},
 				additionalOverlayClass: ''
 			}, config.versions[ver], true);
@@ -144,14 +145,14 @@ require(
 
 										ls.set('showButton', true);
 
-										showButton(true);
+										showButton(!vConfig.buttonConfig.hideArrow);
 									});
 
 									break;
 
 								case 'query':
 
-									showButton(true);
+									showButton(!vConfig.buttonConfig.hideArrow);
 
 									break;
 							}
