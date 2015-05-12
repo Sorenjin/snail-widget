@@ -59,6 +59,7 @@
 }
 
 .floating-desc-text {
+	font-family:       Tahoma, Arial, serif;
 	display:           block;
 	width:             130px;
 	height:            28px;
@@ -75,8 +76,8 @@
 	animation:         floatingText 7s ease infinite;
 
 	strong {
-		font-size:   inherit;
-		color:       inherit;
+		font-size: inherit;
+		color:     inherit;
 	}
 }
 
