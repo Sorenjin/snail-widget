@@ -370,9 +370,12 @@ require(
 			});
 
 			require(['huckster/client-config']);
-		} else
+		}
+		else
 		{
-			throw err;
+			var error = new Error('Huckster error');
+			error.hucksterError = err;
+			throw error;
 		}
 	}
 );
