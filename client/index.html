@@ -6,16 +6,25 @@
 
 	<script src="//yastatic.net/jquery/1.7.0/jquery.min.js"></script>
 
-	<script src="//test2.snail.ru/app/require.js"></script>
-	<script src="//test2.snail.ru/app/hs.js"></script>
 	<script>
-		define('huckster/client-config', [], function ()
-		{
-			return {
-				companyId: 777
+		(function (w, d, t, g, s, c, e, m){
+			m = d.getElementsByTagName(t)[0];
+			function a(){
+				e = d.createElement(t);
+				e.async = 1;
+				e.src = '//' + s + '/app/hs.js';
+				w.hucksterConfig = c || { };
+				w.hucksterConfig.server = s;
+				m.parentNode.insertBefore(e, m);
 			}
-		});
-		require(['huckster']);
+			if (w.require === undefined)
+			{
+				e = d.createElement(t);
+				e.src = '//' + s + '/app/require.js';
+				e.onload = a;
+				m.parentNode.insertBefore(e, m)
+			} else a()
+		})(window, document, 'script', 'hs', 'snw-server.cyb.openstart.ru', {companyId: 777});
 	</script>
 </head>
 <body>

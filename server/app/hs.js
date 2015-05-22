@@ -1,8 +1,9 @@
 (function ()
 {
-	var server = '//test2.snail.ru/app/';
+	var config = window.hucksterConfig || {};
+	var server = '//' + config.server + '/app/';
 
-	require.config({
+	var hucksterContext = require.config({
 
 		paths: {
 			'huckster'           : server + 'huckster',
@@ -37,9 +38,20 @@
 		});
 	}
 	else
-		require.config({
+		hucksterContext.config({
 			paths: {
 				'jquery': server + 'jquery'
 			}
 		});
+	define('huckster/client-config', [], function ()
+	{
+		return config;
+	});
+	hucksterContext(['require'], function (require)
+	{
+		require(['huckster']);
+	});
+	require.config({
+		context: '_'
+	});
 })();
