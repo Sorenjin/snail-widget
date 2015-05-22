@@ -373,9 +373,8 @@ require(
 		}
 		else
 		{
-			var error = new Error('Huckster error');
-			error.hucksterError = err;
-			throw error;
+			if (console && console.error)
+				console.error('Huckster error', err);
 		}
 	}
 );
