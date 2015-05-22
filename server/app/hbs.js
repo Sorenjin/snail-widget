@@ -1,4 +1,4 @@
-define(['handlebars', 'handlebars/intl', 'hbs/config', 'handlebars/intl/ru'], function (hbs, intl, config)
+define(['jquery', 'handlebars', 'handlebars/intl', 'hbs/config', 'handlebars/intl/ru'], function ($, hbs, intl, config)
 {
 	'use strict';
 
