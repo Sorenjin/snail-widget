@@ -1,6 +1,6 @@
 define(
-	['jquery/pgwbrowser', 'cookies'],
-	function (undefined, Cookies)
+	['jquery/pgwbrowser', 'cookies', 'jquery'],
+	function (undefined, Cookies, $)
 	{
 		function log()
 		{
@@ -30,12 +30,9 @@ define(
 				trigger    : function (eventName, data)
 				{
 					if (events[eventName] !== undefined)
-						require(['jquery'], function ($)
+						$.each(events[eventName], function (i, callback)
 						{
-							$.each(events[eventName], function (i, callback)
-							{
-								callback.apply(provider, [{name: eventName}, data]);
-							});
+							callback.apply(provider, [{name: eventName}, data]);
 						});
 
 					return this;
