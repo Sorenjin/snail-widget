@@ -5,16 +5,8 @@
 
 	var hucksterContext = require.config({
 
-		paths: {
-			'huckster'           : server + 'huckster',
-			'cookies'            : server + 'cookies',
-			'hbs'                : server + 'hbs',
-			'css'                : server + 'css',
-			'handlebars'         : server + 'handlebars',
-			'floating-button'    : server + 'floating-button',
-			'jquery/owl.carousel': server + 'jquery/owl.carousel',
-			'jquery/pgwbrowser'  : server + 'jquery/pgwbrowser'
-		},
+		context: 'huckster',
+		baseUrl: server,
 
 		shim: {
 			'jquery/owl.carousel': {
@@ -37,19 +29,9 @@
 			return jQuery;
 		});
 	}
-	else
-		hucksterContext.config({
-			paths: {
-				'jquery': server + 'jquery'
-			}
-		});
-	define('huckster/client-config', [], function ()
+	hucksterContext(['huckster'], function (hs)
 	{
-		return config;
-	});
-	hucksterContext(['require'], function (require)
-	{
-		require(['huckster']);
+		hs(config);
 	});
 	require.config({
 		context: '_'

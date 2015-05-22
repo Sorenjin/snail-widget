@@ -12,7 +12,7 @@ define(
 			events = {},
 			companyId = 0,
 			eventsHandler = {
-				on         : function (eventName, callback)
+				on          : function (eventName, callback)
 				{
 					if (events[eventName] === undefined)
 						events[eventName] = [];
@@ -21,13 +21,13 @@ define(
 
 					return this;
 				},
-				off        : function (eventName)
+				off         : function (eventName)
 				{
 					events[eventName] = [];
 
 					return this;
 				},
-				trigger    : function (eventName, data)
+				trigger     : function (eventName, data)
 				{
 					if (events[eventName] !== undefined)
 						$.each(events[eventName], function (i, callback)
@@ -37,11 +37,11 @@ define(
 
 					return this;
 				},
-				getProvider: function ()
+				getProvider : function ()
 				{
 					return provider;
 				},
-				setCompanyId: function(id)
+				setCompanyId: function (id)
 				{
 					companyId = id;
 				}
@@ -111,16 +111,13 @@ define(
 				{
 					p.userModel.set(response.clientid, p);
 
-					require(['jquery'], function ($)
+					$.each(response, function (key, data)
 					{
-						$.each(response, function (key, data)
-						{
-							if (key == 'clientid' || key == 'companyid')
-								return;
+						if (key == 'clientid' || key == 'companyid')
+							return;
 
-							eventsHandler.trigger(key, data);
-						})
-					});
+						eventsHandler.trigger(key, data);
+					})
 				}
 			};
 		};

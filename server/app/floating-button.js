@@ -2,7 +2,7 @@
  * Created by cyberex on 09.04.15.
  */
 
-define(['jquery'], function ($)
+define(['jquery', 'require'], function ($, require)
 {
 	function FloatingButton(config)
 	{
