@@ -8,21 +8,27 @@
 
 	<script>
 		(function (w, d, t, s, c, e, m){
-			m = d.getElementsByTagName(t)[0];
+			function l(s)
+			{
+				s = d.getElementsByTagName(t);
+				return s[s.length - 1];
+			}
 			function a(){
+				m = l();
 				e = d.createElement(t);
 				e.async = 1;
 				e.src = '//' + s + '/app/hs.js';
 				w.hucksterConfig = c || { };
 				w.hucksterConfig.server = s;
-				m.parentNode.insertBefore(e, m);
+				m.parentNode.insertBefore(e, m.nextSibling);
 			}
 			if (w.require === undefined)
 			{
+				m = l();
 				e = d.createElement(t);
 				e.src = '//' + s + '/app/require.js';
 				e.onload = a;
-				m.parentNode.insertBefore(e, m)
+				m.parentNode.insertBefore(e, m.nextSibling)
 			} else a()
 		})(window, document, 'script', 'snw-server.cyb.openstart.ru', {companyId: 777});
 	</script>
